@@ -1,0 +1,74 @@
+[
+    {
+        "id":1,
+        "title":"Molino Comandante",
+        "price": 520000,
+        "description":"Molino Comandante C40 Nitro Blade",
+        "thumbnail": "https://acdn.mitiendanube.com/stores/003/430/633/products/c40-black-1-b886d7161196ed0f5a17012723742685-240-0.jpg"
+    },
+    {
+        "id":2,
+        "title":"V60",
+        "price": 25000,
+        "description":"V60 de cerámica",
+        "thumbnail": "https://cafecumbal.ar/wp-content/uploads/2022/07/02-acrilico-600x516-1.png"
+    },
+    {
+        "id":3,
+        "title":"Jarra de leche",
+        "price": 15000,
+        "description":"Jarra de leche texturizada",
+        "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_870172-MLA53474780101_012023-O.webp"
+    },
+    {
+        "id":4,
+        "title":"Balanza",
+        "price": 20000,
+        "description":"Balanza Hario",
+        "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_642110-MLA41512557783_042020-O.webp"
+    },
+    {
+        "id":5,
+        "title":"Termómetro",
+        "price": 5000,
+        "description":"Termómetro Hario",
+        "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_704420-MLA41511635166_042020-O.webp"
+    },
+    {
+        "id":6,
+        "title":"Tamper",
+        "price": 10000,
+        "description":"Tamper de acero inoxidable",
+        "thumbnail": "https://http2.mlstatic.com/D_NQ_NP_956228-MLA72509637212_102023-O.webp"
+    },
+    {
+        "id": 7,
+        "title": "Cafe Colombiano",
+        "price": 10000,
+        "description": "Cafe Colombiano, notas chocolate",
+        "thumbnail": "https://img.uline.com/is/image/uline/HD_5596?$Mobile_Zoom$"
+    },
+    {
+        "id": 8,
+        "title": "Cafe Etiopiano",
+        "price": 10000,
+        "description": "Cafe Etiopiano, notas frutales",
+        "thumbnail": "https://img.uline.com/is/image/uline/HD_5596?$Mobile_Zoom$"
+    },
+    {
+        "id": 9,
+        "title": "Cafe Keniano",
+        "price": 10000,
+        "description": "Cafe Keniano, notas florales",
+        "thumbnail": "https://img.uline.com/is/image/uline/HD_5596?$Mobile_Zoom$"
+    },
+    {
+        "id": 10,
+        "title": "Cafe Guatemalteco",
+        "price": 10000,
+        "description": "Cafe Guatemalteco, notas cítricas",
+        "thumbnail": "https://img.uline.com/is/image/uline/HD_5596?$Mobile_Zoom$"
+    }
+
+
+]

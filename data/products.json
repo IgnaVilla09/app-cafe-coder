@@ -1,0 +1,52 @@
+[
+    {
+        "id": 1,
+        "title": "Expreso",
+        "price": 1400,
+        "description": "40ml calibrado a 35 segundos con 32 clicks en molino Comandante",
+        "thumbnail": "https://i.ibb.co/MGQ6Wh4/expreso.png"
+    },
+    {
+        "id": 2,
+        "title": "Macchiato",
+        "price": 1700,
+        "description": "40ml calibrado a 35 segundos con 32 clicks en molino Comandante y una cucharada de leche texturizada",
+        "thumbnail": "https://i.ibb.co/5k6Xgg4/macciato.png"
+        
+    },
+    {
+        "id": 3,
+        "title": "Doppio",
+        "price": 2000,
+        "description": "Doble extracción de expreso (80ml calibrado a 32 clicks en molino Comandante)",
+        "thumbnail": "https://i.ibb.co/YtsnQkW/doppio.png"
+    },
+    {
+        "id": 4,
+        "title": "Latte",
+        "price": 2000,
+        "description": "Expreso con 300 ml de leche texturizada",
+        "thumbnail": "https://i.ibb.co/q7SHDvY/latte.png"
+    },
+    {
+        "id": 5,
+        "title": "Mocha",
+        "price": 2500,
+        "description": "Expreso con 200ml leche vaporizada, espuma de leche y cacao",
+        "thumbnail": "https://i.ibb.co/fvbVrYt/mocha.png"
+    },
+    {
+        "id": 6,
+        "title": "Cappuccino",
+        "price": 2000,
+        "description": "Expreso con 200ml leche vaporizada y espuma de leche",
+        "thumbnail": "https://i.ibb.co/pb0465t/capuccino.png"
+    },
+    {
+        "id": 7,
+        "title": "Flat White",
+        "price": 2000,
+        "description": "Expreso con 200ml leche vaporizada",
+        "thumbnail": "https://i.ibb.co/q7SHDvY/latte.png"
+    }
+]
