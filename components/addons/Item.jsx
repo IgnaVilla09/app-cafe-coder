@@ -1,10 +1,20 @@
 import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
 import arrow from "../../assets/arrow.png"
+import { useNavigation } from '@react-navigation/native';
 
-export default function Item({ title, image }) {
+export default function Item({ title, image, description, price }) {
+
+
+  const navigation = useNavigation();
+
   return (
     <View style={styles.item}>
-      <TouchableOpacity style={styles.list}>
+      <TouchableOpacity 
+        style={styles.list} 
+        onPress={() => { 
+          navigation.navigate("ProductDetail", { title, image, description, price }); // Pasar las propiedades del producto
+        }}
+      >
         <Image style={styles.image} source={{ uri: image }} />
         <Text style={styles.title}>{title}</Text>
         <Image source={arrow} style={styles.iconArrow} />

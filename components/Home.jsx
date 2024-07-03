@@ -5,16 +5,21 @@ import BtnOptional from './addons/btnOptional'
 import BtnWhite from './addons/btnWhite'
 import coffeBeans from "../assets/coffebeans.png"
 import logoGoogle from "../assets/google.webp"
+import { useNavigation } from '@react-navigation/native';
+
 
 export default function Home() {
+
+    const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
         <Text style={styles.title}>Bienvenidos a Coffee Store</Text>
         <Image source={coffeBeans} style={styles.image}></Image>
         <View style={styles.subcontainer}>
-        <BtnPrimary title="Ingresar" sizeBtn={150} onPress={() => alert('Button Pressed')} />
-        <BtnSecondary title="Registrarse" sizeBtn={150} onPress={() => alert('Button Pressed')} />
-        <BtnWhite title="Continuar con Google" imageSrc={logoGoogle} onPress={()=> alert("GOOGLE!")}/>
+        <BtnPrimary title="Ingresar" sizeBtn={150} onPress={() => navigation.navigate("Login")} />
+        <BtnSecondary title="Registrarse" sizeBtn={150} onPress={() => navigation.navigate("Register")} />
+        <BtnWhite title="Continuar con Google" imageSrc={logoGoogle} onPress={()=> navigation.navigate("Login")}/>
         </View>
         
     </View>
@@ -27,6 +32,7 @@ const styles = StyleSheet.create({
         padding: 20,
         alignItems: "center",
         justifyContent: "center",
+        backgroundColor: "#EDF1D6",
     },
     title: {
         fontSize: 40,
