@@ -1,63 +1,92 @@
-import { StyleSheet, Text, Image, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, Image, TouchableOpacity, View, Alert } from 'react-native';
 import arrow from "../../assets/arrow.png";
 import { useNavigation } from '@react-navigation/native';
-// import products from "../../data/products.json";
+import { useState, useContext } from 'react';
+import { CartContext } from '../../context/CartContext';
 
-export default function ProductList({route}) {
-
+export default function ProductDetail({ route }) {
     const { title, image, description, price } = route.params; 
-
     const navigation = useNavigation();
+    const [quantity, setQuantity] = useState(1);
+    const [subPrice, setSubPrice] = useState(price * quantity);
+    const { addToCart } = useContext(CartContext); 
 
+    const addQuantity = () => {
+        setQuantity(quantity + 1);
+        setSubPrice((quantity + 1) * price);
+    };
 
-    const quantity = 2;
-    const subPrice = price * quantity;
+    const downQuantity = () => {
+        if (quantity > 1) {
+            setQuantity(quantity - 1);
+            setSubPrice((quantity - 1) * price);
+        }
+    };
 
-  return (
-    <View style={styles.body}>
-        <View style={styles.container}>
-            <TouchableOpacity style={styles.arrowContainer} onPress={() => { navigation.goBack() }}>
-                <Image style={styles.arrowBack} source={arrow} />
-            </TouchableOpacity>
-            <Text style={styles.title}>{title}</Text>
-        </View>
+    const handleAddToCart = () => {
+        const product = {
+            title,
+            image,
+            description,
+            price,
+            quantity,
+            subPrice
+        };
+        addToCart(product);
+        Alert.alert('Producto añadido al carrito');
+        navigation.navigate('Cart');
+    };
 
-        <View style={styles.ImageContainer}>
-            <Image source={{uri: image}} style={styles.imageproduct}></Image>
-        </View>
-
-        <View style={styles.quantityContainer}>
-            <Text style={styles.subtitleContainer}>Unidades</Text>
-            <View style={styles.buttonContainer}>
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.textButton}>+</Text>
+    return (
+        <View style={styles.body}>
+            <View style={styles.container}>
+                <TouchableOpacity style={styles.arrowContainer} onPress={() => { navigation.goBack() }}>
+                    <Image style={styles.arrowBack} source={arrow} />
                 </TouchableOpacity>
-                <Text>{quantity}</Text>
-                {quantity <=  0 ? (<TouchableOpacity style={styles.buttonDisabled}>
-                    <Text style={styles.textButton}>-</Text>
-                </TouchableOpacity>) : <TouchableOpacity style={styles.button}>
-                    <Text style={styles.textButton}>-</Text>
-                </TouchableOpacity> }
+                <Text style={styles.title}>{title}</Text>
+            </View>
+
+            <View style={styles.ImageContainer}>
+                <Image source={{ uri: image }} style={styles.imageproduct}></Image>
+            </View>
+
+            <View style={styles.quantityContainer}>
+                <Text style={styles.subtitleContainer}>Unidades</Text>
+                <View style={styles.buttonContainer}>
+                    <TouchableOpacity style={styles.button} onPress={addQuantity}>
+                        <Text style={styles.textButton}>+</Text>
+                    </TouchableOpacity>
+                    <Text style={styles.textDescrip}>{quantity}</Text>
+                    {quantity <= 1 ? (
+                        <TouchableOpacity style={styles.buttonDisabled}>
+                            <Text style={styles.textButton}>-</Text>
+                        </TouchableOpacity>
+                    ) : (
+                        <TouchableOpacity style={styles.button} onPress={downQuantity}>
+                            <Text style={styles.textButton}>-</Text>
+                        </TouchableOpacity>
+                    )}
+                </View>
+            </View>
+
+            <View style={styles.separate}></View>
+
+            <View style={styles.descriptionContainer}>
+                <Text style={styles.labelDescrip}>Descripción:</Text>
+                <Text style={styles.textDescrip}>{description}</Text>
+                <View style={styles.separate}></View>
+                <Text style={styles.labelDescrip}>Precio por unidad</Text>
+                <Text style={styles.textDescrip}>${price}</Text>
+            </View>
+
+            <View style={styles.boxBuy}>
+                <TouchableOpacity style={styles.buttonBuy} onPress={handleAddToCart}>
+                    <Text style={styles.textBuy}>Añadir al carrito</Text>
+                </TouchableOpacity>
+                {subPrice > 0 ? (<Text style={styles.subprice}>Subtotal: ${subPrice}</Text>) : null }
             </View>
         </View>
-        
-        <View style={styles.separate}></View>
-
-        <View style={styles.descriptionContainer}>
-            <Text style={styles.labelDescrip}>Descripción:</Text>
-            <Text style={styles.textDescrip}>{description}</Text>
-            <View style={styles.separate}></View>
-            <Text style={styles.textDescrip}>${price}</Text>
-        </View>
-
-        <View style={styles.boxBuy}>
-            <TouchableOpacity style={styles.buttonBuy}>
-                <Text style={styles.textBuy}>Añadir al carrito</Text>
-            </TouchableOpacity>
-            {subPrice > 0 ? (<Text style={styles.subprice}>Subtotal: ${subPrice}</Text>) : null }
-        </View>
-  </View>
-  );
+    );
 }
 
 const styles = StyleSheet.create({

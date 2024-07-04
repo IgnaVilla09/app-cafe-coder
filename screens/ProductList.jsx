@@ -2,18 +2,20 @@ import { StyleSheet, Text, Image, TouchableOpacity, View, FlatList } from 'react
 import arrow from "../assets/arrow.png";
 import { useNavigation } from '@react-navigation/native';
 import products from "../data/products.json";
+import { useState } from'react';
 import Item from '../components/addons/Item';
 import { ShoppingCart } from 'lucide-react-native';
 
 
-export default function ProductList() {
+
+export default function ProductList({}) {
 
   const navigation = useNavigation();
 
   return (
     <View style={styles.body}>
       <View style={styles.cartContainerView}>
-        <TouchableOpacity style={styles.viewCart} onPress={() => { alert("ACA VES EL CARRITO") }}>
+        <TouchableOpacity style={styles.viewCart} onPress={() => { navigation.navigate("Cart") }}>
             <ShoppingCart color="white" size={20} />
         </TouchableOpacity>
       </View>

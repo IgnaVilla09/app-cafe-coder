@@ -1,10 +1,16 @@
-import { StyleSheet, Text, View, Image } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 
 export default function Navbar() {
+
+  const navigation = useNavigation()
+
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={ ()=> {
+      navigation.navigate("Menu")
+    }}>
         <Text style={styles.TextNav}>Coffee Store</Text>
-    </View>
+    </TouchableOpacity>
   )
 }
 

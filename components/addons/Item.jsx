@@ -12,7 +12,7 @@ export default function Item({ title, image, description, price }) {
       <TouchableOpacity 
         style={styles.list} 
         onPress={() => { 
-          navigation.navigate("ProductDetail", { title, image, description, price }); // Pasar las propiedades del producto
+          navigation.navigate("ProductDetail", { title, image, description, price }); 
         }}
       >
         <Image style={styles.image} source={{ uri: image }} />
