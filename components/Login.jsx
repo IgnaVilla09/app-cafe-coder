@@ -7,10 +7,12 @@ import {
   View,
 } from "react-native";
 import arrow from "../assets/arrow.png";
+import coffeBeans from "../assets/coffebeans.png";
+
 import BtnSecondary from "./addons/btnSecondary";
 import { useNavigation } from "@react-navigation/native";
 
-export default function Login() {
+export default function Login({ setSession }) {
   const navigation = useNavigation();
 
   return (
@@ -53,7 +55,7 @@ export default function Login() {
           title={"Ingresar"}
           sizeBtn={250}
           onPress={() => {
-            navigation.navigate("Menu");
+            setSession(true);
           }}
         />
         <View>

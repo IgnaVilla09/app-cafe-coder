@@ -1,14 +1,11 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import BtnPrimary from "./addons/btnPrimary";
 import BtnSecondary from "./addons/btnSecondary";
-import BtnOptional from "./addons/btnOptional";
-import BtnWhite from "./addons/btnWhite";
 import coffeBeans from "../assets/coffebeans.png";
-import logoGoogle from "../assets/google.webp";
 import { useNavigation } from "@react-navigation/native";
 
-export default function Home() {
-  const navigation = useNavigation();
+export default function Home({ setSession }) {
+  const navigationHome = useNavigation();
 
   return (
     <View style={styles.container}>
@@ -18,12 +15,12 @@ export default function Home() {
         <BtnPrimary
           title="Ingresar"
           sizeBtn={150}
-          onPress={() => navigation.navigate("Login")}
+          onPress={() => navigationHome.navigate("Login")}
         />
         <BtnSecondary
           title="Registrarse"
           sizeBtn={150}
-          onPress={() => navigation.navigate("Register")}
+          onPress={() => navigationHome.navigate("Register")}
         />
       </View>
     </View>
