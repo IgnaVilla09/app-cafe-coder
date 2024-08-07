@@ -1,7 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { CartProvider } from "./context/CartContext";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { useState } from "react";
@@ -9,6 +8,8 @@ import Navigation from "./Navigation";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import Register from "./components/Register";
+import { Provider } from "react-redux";
+import store from "./context/store";
 
 const Stack = createStackNavigator();
 
@@ -16,7 +17,7 @@ export default function App() {
   const [session, setSession] = useState(false);
 
   return (
-    <CartProvider>
+    <Provider store={store}>
       <NavigationContainer>
         <SafeAreaView
           style={styles.container}
@@ -24,7 +25,7 @@ export default function App() {
         >
           {session ? (
             <Stack.Navigator>
-              <Stack.Screen name="Main">
+              <Stack.Screen name="Main" options={{ headerShown: false }}>
                 {(props) => <Navigation {...props} setSession={setSession} />}
               </Stack.Screen>
             </Stack.Navigator>
@@ -43,7 +44,7 @@ export default function App() {
           <StatusBar style="dark" backgroundColor="white" />
         </SafeAreaView>
       </NavigationContainer>
-    </CartProvider>
+    </Provider>
   );
 }
 

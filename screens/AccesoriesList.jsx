@@ -10,12 +10,12 @@ import arrow from "../assets/arrow.png";
 import { useNavigation } from "@react-navigation/native";
 // import products from "../data/products.json";
 import Item from "../components/addons/Item";
-import { useGetProductsQuery } from "../services/shopServices";
+import { useGetAccesoriesQuery } from "../services/shopServices";
 
-export default function ProductList({}) {
+export default function AccesoriesList({}) {
   const navigation = useNavigation();
 
-  const { data: Productos } = useGetProductsQuery();
+  const { data: Accesorios } = useGetAccesoriesQuery();
 
   return (
     <View style={styles.body}>
@@ -32,7 +32,7 @@ export default function ProductList({}) {
       </View>
       <FlatList
         showsVerticalScrollIndicator={false}
-        data={Productos}
+        data={Accesorios}
         renderItem={({ item }) => (
           <Item
             title={item.title}

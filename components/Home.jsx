@@ -4,7 +4,7 @@ import BtnSecondary from "./addons/btnSecondary";
 import coffeBeans from "../assets/coffebeans.png";
 import { useNavigation } from "@react-navigation/native";
 
-export default function Home({ setSession }) {
+export default function Home() {
   const navigationHome = useNavigation();
 
   return (

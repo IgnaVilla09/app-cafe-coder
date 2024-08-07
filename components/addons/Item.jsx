@@ -1,18 +1,21 @@
-import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
-import arrow from "../../assets/arrow.png"
-import { useNavigation } from '@react-navigation/native';
+import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
+import arrow from "../../assets/arrow.png";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Item({ title, image, description, price }) {
-
-
   const navigation = useNavigation();
 
   return (
     <View style={styles.item}>
-      <TouchableOpacity 
-        style={styles.list} 
-        onPress={() => { 
-          navigation.navigate("ProductDetail", { title, image, description, price }); 
+      <TouchableOpacity
+        style={styles.list}
+        onPress={() => {
+          navigation.navigate("ProductDetail", {
+            title,
+            image,
+            description,
+            price,
+          });
         }}
       >
         <Image style={styles.image} source={{ uri: image }} />
@@ -31,13 +34,13 @@ const styles = StyleSheet.create({
     elevation: 20,
   },
   list: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     borderRadius: 5,
   },
   title: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     flex: 1,
     marginLeft: 10,
   },
@@ -51,6 +54,6 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
     marginLeft: 10,
-    transform: [{ rotate: '270deg' }],
+    transform: [{ rotate: "270deg" }],
   },
 });

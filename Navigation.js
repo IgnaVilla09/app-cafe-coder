@@ -11,6 +11,7 @@ import ProductDetail from "./screens/Detail/ProductDetail";
 import Profile from "./screens/Profile";
 import { SquareMenu, ShoppingCart, CircleUser } from "lucide-react-native";
 import Item from "./components/addons/Item";
+import AccesoriesList from "./screens/AccesoriesList";
 
 const Stack = createStackNavigator();
 
@@ -22,6 +23,7 @@ function StackContainer() {
     >
       <Stack.Screen name="Menu" component={Menu} />
       <Stack.Screen name="ProductList" component={ProductList} />
+      <Stack.Screen name="AccesoriesList" component={AccesoriesList} />
       <Stack.Screen name="ProductDetail" component={ProductDetail} />
       <Stack.Screen name="Cart" component={Cart} />
       <Stack.Screen name="Profile" component={Profile} />
