@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -5,15 +6,48 @@ import {
   Image,
   TouchableOpacity,
   View,
+  Alert,
 } from "react-native";
 import arrow from "../assets/arrow.png";
-import coffeBeans from "../assets/coffebeans.png";
-
 import BtnSecondary from "./addons/btnSecondary";
 import { useNavigation } from "@react-navigation/native";
+import { useDispatch } from "react-redux";
+import { useSignInMutation } from "../services/authServices";
+import { setUser } from "../features/UserSlice";
 
-export default function Login({ setSession }) {
+export default function Login() {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [signIn, { isLoading, error }] = useSignInMutation();
+
+  const handleLogin = async () => {
+    try {
+      const result = await signIn({ email, password });
+      if (result.data.localId && result.data.idToken) {
+        dispatch(
+          setUser({
+            email: email,
+            idToken: result.data.idToken,
+          })
+        );
+        Alert.alert("Bienvenido", "Has iniciado sesión correctamente.");
+        navigation.navigate("Main");
+      } else {
+        Alert.alert(
+          "Error",
+          "Credenciales incorrectas. Por favor, inténtelo de nuevo."
+        );
+      }
+    } catch (error) {
+      Alert.alert(
+        "Error",
+        "Hubo un problema al iniciar sesión. Por favor, inténtelo de nuevo más tarde."
+      );
+    }
+  };
 
   return (
     <View style={styles.body}>
@@ -24,7 +58,7 @@ export default function Login({ setSession }) {
             navigation.goBack();
           }}
         >
-          <Image style={styles.arrowBack} source={arrow}></Image>
+          <Image style={styles.arrowBack} source={arrow} />
         </TouchableOpacity>
         <Text style={styles.title}>Ingresar</Text>
       </View>
@@ -36,6 +70,8 @@ export default function Login({ setSession }) {
             placeholder="Ingrese un email"
             keyboardType="email-address"
             autoCapitalize="none"
+            value={email}
+            onChangeText={(text) => setEmail(text)}
           />
         </View>
         <View>
@@ -44,20 +80,14 @@ export default function Login({ setSession }) {
             style={styles.input}
             placeholder="Ingrese una contraseña"
             secureTextEntry
+            value={password}
+            onChangeText={(text) => setPassword(text)}
           />
         </View>
-        <View>
-          <TouchableOpacity>
-            <Text style={styles.btnLink}>¿Olvidaste tu contraseña?</Text>
-          </TouchableOpacity>
-        </View>
-        <BtnSecondary
-          title={"Ingresar"}
-          sizeBtn={250}
-          onPress={() => {
-            setSession(true);
-          }}
-        />
+        <TouchableOpacity>
+          <Text style={styles.btnLink}>¿Olvidaste tu contraseña?</Text>
+        </TouchableOpacity>
+        <BtnSecondary title={"Ingresar"} sizeBtn={250} onPress={handleLogin} />
         <View>
           <TouchableOpacity
             style={styles.boxRegister}
@@ -66,7 +96,7 @@ export default function Login({ setSession }) {
             }}
           >
             <Text style={styles.registerbtn}>¿Aún no tienes cuenta? </Text>
-            <Text style={styles.registerbtnSpan}>Registrate!</Text>
+            <Text style={styles.registerbtnSpan}>Regístrate!</Text>
           </TouchableOpacity>
         </View>
       </View>

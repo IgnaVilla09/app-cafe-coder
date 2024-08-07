@@ -1,16 +1,35 @@
 import { StyleSheet, Text, TouchableOpacity, View, Alert } from "react-native";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { clearUser } from "../features/UserSlice";
 
-export default function Profile({ setSession }) {
+export default function Profile() {
+  const dispatch = useDispatch();
+
+  const handleLogout = () => {
+    Alert.alert(
+      "Cerrar Sesión",
+      "¿Estás seguro que deseas cerrar sesión?",
+      [
+        {
+          text: "Cancelar",
+          style: "cancel",
+        },
+        {
+          text: "Confirmar",
+          onPress: () => {
+            dispatch(clearUser());
+          },
+        },
+      ],
+      { cancelable: false }
+    );
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.options}>
-        <TouchableOpacity
-          onPress={() => {
-            Alert.alert("Hasta luego!", "Sesión finalizada!");
-            setSession(false);
-          }}
-        >
+        <TouchableOpacity onPress={handleLogout}>
           <Text style={styles.textOptions}>Cerrar Sesión</Text>
         </TouchableOpacity>
       </View>
