@@ -8,7 +8,6 @@ import {
 } from "react-native";
 import arrow from "../assets/arrow.png";
 import { useNavigation } from "@react-navigation/native";
-// import products from "../data/products.json";
 import Item from "../components/addons/Item";
 import { useGetAccesoriesQuery } from "../services/shopServices";
 

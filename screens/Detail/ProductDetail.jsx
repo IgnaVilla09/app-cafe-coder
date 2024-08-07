@@ -11,6 +11,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../features/CartSlice";
+import { ShoppingCart } from "lucide-react-native";
 
 export default function ProductDetail({ route }) {
   const { title, image, description, price } = route.params;
@@ -32,7 +33,6 @@ export default function ProductDetail({ route }) {
     };
     dispatch(addToCart(product));
     Alert.alert("Producto añadido al carrito");
-    navigation.navigate("Cart");
   };
 
   const addQuantity = () => {
@@ -92,6 +92,7 @@ export default function ProductDetail({ route }) {
 
       <View style={styles.boxBuy}>
         <TouchableOpacity style={styles.buttonBuy} onPress={handleAddToCart}>
+          <ShoppingCart color={"#fff"} width={20} />
           <Text style={styles.textBuy}>Añadir al carrito</Text>
         </TouchableOpacity>
         {subPrice > 0 ? (
@@ -210,12 +211,15 @@ const styles = StyleSheet.create({
     color: "#14AE5C",
   },
   buttonBuy: {
-    width: 110,
-    height: 60,
+    width: 130,
+    height: 80,
     backgroundColor: "#14AE5C",
     borderRadius: 15,
     justifyContent: "center",
     alignItems: "center",
+    flexWrap: "wrap",
+    flexDirection: "row",
+    padding: 20,
   },
   textBuy: {
     fontSize: 16,

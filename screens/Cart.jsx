@@ -1,10 +1,10 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, Alert } from "react-native";
 import React from "react";
 import Navbar from "../components/Navbar";
-import { DollarSign, ArrowLeft } from "lucide-react-native";
+import { DollarSign, ArrowLeft, Trash2Icon } from "lucide-react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector, useDispatch } from "react-redux";
-import { removeFromCart, emptyCart } from "../features/CartSlice";
+import { emptyCart } from "../features/CartSlice";
 
 export default function Cart() {
   const navigation = useNavigation();
@@ -15,6 +15,13 @@ export default function Cart() {
 
   const emptyCartHandler = () => {
     dispatch(emptyCart());
+  };
+
+  const confirmOrder = () => {
+    navigation.navigate("Checkout", {
+      cartItems: cart,
+      total: calculateTotal(),
+    });
   };
 
   const calculateTotal = () => {
@@ -29,21 +36,25 @@ export default function Cart() {
       <Navbar />
 
       <View style={styles.container}>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.goBack();
-          }}
-        >
-          <ArrowLeft color="black" size={20} />
-        </TouchableOpacity>
-        <Text style={styles.TextCart}>Carrito</Text>
+        <View style={styles.containerSubtitle}>
+          <TouchableOpacity
+            onPress={() => {
+              navigation.goBack();
+            }}
+          >
+            <ArrowLeft color="black" size={30} />
+          </TouchableOpacity>
+          <Text style={styles.TextCart}>Carrito</Text>
+        </View>
         <View>
           {productos ? (
             cart.map((product, index) => (
               <View style={styles.boxproducts} key={index}>
-                <Text style={styles.textproducts}>{product.title}</Text>
+                <Text style={styles.textproducts}>- {product.title}</Text>
                 <Text style={styles.textproducts}>x{product.quantity}</Text>
-                <Text style={styles.textproducts}>{product.subPrice}</Text>
+                <Text style={styles.textproductsPrice}>
+                  ${product.subPrice}
+                </Text>
               </View>
             ))
           ) : (
@@ -62,18 +73,29 @@ export default function Cart() {
             <TouchableOpacity
               style={styles.btnPay}
               onPress={() => {
-                alert("COMPRADO!");
-                emptyCartHandler();
+                Alert.alert(
+                  "Confirmar pedido",
+                  "¿Estás seguro de que deseas confirmar tu pedido?",
+                  [
+                    {
+                      text: "Cancelar",
+                      style: "cancel",
+                    },
+                    { text: "Confirmar", onPress: confirmOrder },
+                  ],
+                  { cancelable: false }
+                );
               }}
             >
               <Text style={styles.Text}>Confirmar pedido</Text>
-              <DollarSign color="black" width={20} />
+              <DollarSign color="#fff" width={20} />
             </TouchableOpacity>
 
             <TouchableOpacity
               style={styles.btnDelete}
               onPress={emptyCartHandler}
             >
+              <Trash2Icon color="#fff" width={20} />
               <Text style={styles.Text}>Vaciar carrito</Text>
             </TouchableOpacity>
             <View style={styles.subtotalPrice}>
@@ -81,12 +103,10 @@ export default function Cart() {
             </View>
           </View>
         ) : (
-          <>
-            <TouchableOpacity style={styles.btnPayDisabled}>
-              <Text style={styles.Text}>Confirmar pedido</Text>
-              <DollarSign color="black" width={20} />
-            </TouchableOpacity>
-          </>
+          <TouchableOpacity style={styles.btnPayDisabled}>
+            <Text style={styles.Text}>Confirmar pedido</Text>
+            <DollarSign color="#fff" width={20} />
+          </TouchableOpacity>
         )}
       </View>
     </View>
@@ -103,8 +123,13 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
   },
+  containerSubtitle: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 20,
+  },
   TextCart: {
-    width: "100%",
+    width: "90%",
     fontSize: 20,
     fontWeight: "500",
     borderBottomWidth: 2,
@@ -119,6 +144,11 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "500",
   },
+  textproductsPrice: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#14AE5C",
+  },
   btnDelete: {
     width: 100,
     height: 80,
@@ -126,7 +156,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     position: "absolute",
-    flexDirection: "row-reverse",
     left: 20,
     bottom: 20,
     borderRadius: 10,
@@ -158,7 +187,8 @@ const styles = StyleSheet.create({
   },
   Text: {
     textAlign: "center",
-    fontWeight: "500",
+    fontWeight: "bold",
+    color: "#fff",
   },
   totalContainer: {
     position: "absolute",

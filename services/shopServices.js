@@ -15,6 +15,13 @@ export const shopApi = createApi({
     getAccesories: builder.query({
       query: () => `accesories.json`,
     }),
+    postOrders: builder.mutation({
+      query: ({ ...order }) => ({
+        url: "orders.json",
+        method: "POST",
+        body: order,
+      }),
+    }),
   }),
 });
 
@@ -22,4 +29,5 @@ export const {
   useGetProductsQuery,
   useGetProductsByIdQuery,
   useGetAccesoriesQuery,
+  usePostOrdersMutation,
 } = shopApi;
