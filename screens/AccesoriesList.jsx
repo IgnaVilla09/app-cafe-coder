@@ -27,7 +27,7 @@ export default function AccesoriesList({}) {
         >
           <Image style={styles.arrowBack} source={arrow} />
         </TouchableOpacity>
-        <Text style={styles.title}>Menú</Text>
+        <Text style={styles.title}>Tienda Barista</Text>
       </View>
       <FlatList
         showsVerticalScrollIndicator={false}

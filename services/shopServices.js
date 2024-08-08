@@ -5,6 +5,7 @@ export const shopApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: baseUrl,
   }),
+  tagTypes: ["profileImageGet"],
   endpoints: (builder) => ({
     getProducts: builder.query({
       query: () => `products.json`,
@@ -22,6 +23,20 @@ export const shopApi = createApi({
         body: order,
       }),
     }),
+    getProfileimage: builder.query({
+      query: (localId) => `profileImages/${localId}.json`,
+      providesTags: ["profileImageGet"],
+    }),
+    postProfileImage: builder.mutation({
+      query: ({ image, localId }) => ({
+        url: `profileImages/${localId}.json`,
+        method: "PUT",
+        body: {
+          image: image,
+        },
+      }),
+      invalidatesTags: ["profileImageGet"],
+    }),
   }),
 });
 
@@ -30,4 +45,6 @@ export const {
   useGetProductsByIdQuery,
   useGetAccesoriesQuery,
   usePostOrdersMutation,
+  useGetProfileimageQuery,
+  usePostProfileImageMutation,
 } = shopApi;

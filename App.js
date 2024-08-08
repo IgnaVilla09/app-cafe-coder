@@ -15,7 +15,6 @@ import { useSelector } from "react-redux";
 const Stack = createStackNavigator();
 
 function App() {
-  const [session, setSession] = useState(false);
   const { user } = useSelector((state) => state.auth.value);
 
   return (
@@ -27,16 +26,16 @@ function App() {
         {user ? (
           <Stack.Navigator>
             <Stack.Screen name="Main" options={{ headerShown: false }}>
-              {(props) => <Navigation {...props} setSession={setSession} />}
+              {(props) => <Navigation {...props} />}
             </Stack.Screen>
           </Stack.Navigator>
         ) : (
           <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="Home">
-              {(props) => <Home {...props} setSession={setSession} />}
+              {(props) => <Home {...props} />}
             </Stack.Screen>
             <Stack.Screen name="Login">
-              {(props) => <Login {...props} setSession={setSession} />}
+              {(props) => <Login {...props} />}
             </Stack.Screen>
             <Stack.Screen name="Register" component={Register} />
           </Stack.Navigator>

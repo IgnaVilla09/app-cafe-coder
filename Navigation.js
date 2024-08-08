@@ -10,6 +10,7 @@ import { SquareMenu, ShoppingCart, CircleUser } from "lucide-react-native";
 import Item from "./components/addons/Item";
 import AccesoriesList from "./screens/AccesoriesList";
 import Checkout from "./screens/Checkout";
+import ImageSelector from "./components/ImageSelector";
 
 const Stack = createStackNavigator();
 
@@ -26,6 +27,7 @@ function StackContainer() {
       <Stack.Screen name="Cart" component={Cart} />
       <Stack.Screen name="Checkout" component={Checkout} />
       <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="ImageSelector" component={ImageSelector} />
       <Stack.Screen name="Item" component={Item} />
     </Stack.Navigator>
   );
@@ -33,7 +35,7 @@ function StackContainer() {
 
 const Tab = createBottomTabNavigator();
 
-function BottomTabNavigation({ setSession }) {
+function BottomTabNavigation() {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -70,16 +72,16 @@ function BottomTabNavigation({ setSession }) {
           },
         }}
       >
-        {(props) => <Profile {...props} setSession={setSession} />}
+        {(props) => <Profile {...props} />}
       </Tab.Screen>
     </Tab.Navigator>
   );
 }
 
-const Navigation = ({ setSession }) => {
+const Navigation = () => {
   return (
     <NavigationContainer independent={true}>
-      <BottomTabNavigation setSession={setSession} />
+      <BottomTabNavigation />
     </NavigationContainer>
   );
 };
