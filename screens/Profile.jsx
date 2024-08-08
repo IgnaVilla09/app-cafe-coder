@@ -10,8 +10,10 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearUser } from "../features/UserSlice";
 import UserProfile from "../assets/profile.jpg";
+import arrow from "../assets/arrow.png";
 import { useNavigation } from "@react-navigation/native";
 import { useGetProfileimageQuery } from "../services/shopServices";
+import Navbar from "../components/Navbar";
 
 export default function Profile() {
   const navigation = useNavigation();
@@ -40,12 +42,21 @@ export default function Profile() {
 
   const { user } = useSelector((state) => state.auth.value);
 
-  const [image, setimage] = useState(null);
   const { imageCamera, localId } = useSelector((state) => state.auth.value);
   const { data: imageFromBase } = useGetProfileimageQuery(localId);
 
   return (
     <View style={styles.container}>
+      <Navbar />
+      <View>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("Menu");
+          }}
+        >
+          <Image style={styles.arrowBack} source={arrow} />
+        </TouchableOpacity>
+      </View>
       <View style={styles.containerPicture}>
         {imageFromBase || imageCamera ? (
           <Image
@@ -137,5 +148,11 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     padding: 10,
     elevation: 5,
+  },
+
+  arrowBack: {
+    width: 30,
+    height: 30,
+    transform: [{ rotate: "90deg" }],
   },
 });

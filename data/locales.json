@@ -1,0 +1,92 @@
+[
+  {
+    "id": "1",
+    "name": "Sucursal Centro",
+    "address": "Av. Principal 123, Centro",
+    "latitude": -32.89290542563252,
+    "longitude": -68.8492983183606,
+    "phone": "555-1234",
+    "hours": "09:00 - 18:00"
+  },
+  {
+    "id": "2",
+    "name": "Sucursal Norte",
+    "address": "Calle Norte 456, Norte",
+    "latitude": -32.89103729608962,
+    "longitude": -68.85459967789805,
+    "phone": "555-5678",
+    "hours": "10:00 - 19:00"
+  },
+  {
+    "id": "3",
+    "name": "Sucursal Sur",
+    "address": "Calle Sur 789, Sur",
+    "latitude": -32.8876318077523,
+    "longitude": -68.84657450860175,
+    "phone": "555-9012",
+    "hours": "11:00 - 20:00"
+  },
+  {
+    "id": "4",
+    "name": "Sucursal Este",
+    "address": "Calle Este 012, Este",
+    "latitude": -32.89267411417826,
+    "longitude": -68.83874380630807,
+    "phone": "555-3456",
+    "hours": "12:00 - 21:00"
+  },
+  {
+    "id": "5",
+    "name": "Sucursal Oeste",
+    "address": "Calle Oeste 678, Oeste",
+    "latitude": -34.58148057968556,
+    "longitude": -58.425552392641244,
+    "phone": "555-7890",
+    "hours": "13:00 - 22:00"
+  },
+  {
+    "id": "6",
+    "name": "Sucursal Puerta del Sol",
+    "address": "Calle Puerta del Sol 987, Puerta del Sol",
+    "latitude": -34.58019796613322,
+    "longitude": -58.427398161347426,
+    "phone": "555-6789",
+    "hours": "14:00 - 23:00"
+  },
+  {
+    "id": "7",
+    "name": "Sucursal Alameda",
+    "address": "Calle Alameda 432, Alameda",
+    "latitude": -34.58239658433592,
+    "longitude": -58.428361638257506,
+    "phone": "555-2134",
+    "hours": "15:00 - 00:00"
+  },
+  {
+    "id": "8",
+    "name": "Sucursal Calle Tandil",
+    "address": "Calle Tandil 765, Tigre",
+    "latitude": -34.596348751217356,
+    "longitude": -58.50987240178451,
+    "phone": "555-4567",
+    "hours": "16:00 - 01:00"
+  },
+  {
+    "id": "9",
+    "name": "Sucursal La Plata",
+    "address": "Calle La Plata 1098, La Plata",
+    "latitude": -31.415088963172906,
+    "longitude": -64.19308095817337,
+    "phone": "555-8765",
+    "hours": "17:00 - 02:00"
+  },
+  {
+    "id": "10",
+    "name": "Sucursal Buenos Aires",
+    "address": "Calle Buenos Aires 234, Cordoba",
+    "latitude": -31.42667039794144,
+    "longitude": -64.1875117541274,
+    "phone": "555-9876",
+    "hours": "18:00 - 03:00"
+  }
+]

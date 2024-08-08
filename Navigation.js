@@ -11,16 +11,15 @@ import Item from "./components/addons/Item";
 import AccesoriesList from "./screens/AccesoriesList";
 import Checkout from "./screens/Checkout";
 import ImageSelector from "./components/ImageSelector";
+import Locals from "./screens/Locals";
 
 const Stack = createStackNavigator();
 
 function StackContainer() {
   return (
-    <Stack.Navigator
-      initialRouteName="Menu"
-      screenOptions={{ headerShown: false }}
-    >
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Menu" component={Menu} />
+      <Stack.Screen name="Locales" component={Locals} />
       <Stack.Screen name="ProductList" component={ProductList} />
       <Stack.Screen name="AccesoriesList" component={AccesoriesList} />
       <Stack.Screen name="ProductDetail" component={ProductDetail} />

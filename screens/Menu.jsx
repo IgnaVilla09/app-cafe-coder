@@ -35,11 +35,11 @@ export default function Menu() {
           </View>
           <View>
             <BtnOptional
-              title={"Locales"}
+              title={"Local cercano"}
               fontSize={35}
               sizeBtn={300}
               onPress={() => {
-                alert("Locales");
+                navigation.navigate("Locales");
               }}
             />
           </View>

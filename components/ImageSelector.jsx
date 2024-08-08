@@ -18,6 +18,7 @@ import {
   usePostProfileImageMutation,
   useGetProfileimageQuery,
 } from "../services/shopServices";
+import Navbar from "./Navbar";
 
 export default function ImageSelector() {
   const [image, setImage] = useState(null);
@@ -65,6 +66,7 @@ export default function ImageSelector() {
 
   return (
     <View style={styles.container}>
+      <Navbar />
       <View>
         <TouchableOpacity
           onPress={() => {
