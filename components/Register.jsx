@@ -14,6 +14,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useSignUpMutation } from "../services/authServices";
 import { useDispatch } from "react-redux";
 import { setUser } from "../features/UserSlice";
+import { insertSession } from "../persistence";
 
 export default function Register() {
   const navigation = useNavigation();
@@ -27,12 +28,23 @@ export default function Register() {
 
   useEffect(() => {
     if (result.isSuccess) {
-      dispatch(
-        setUser({
-          email: result.data.email,
-          idToken: result.data.idToken,
+      insertSession({
+        email: result.data.email,
+        localId: result.data.localId,
+        token: result.data.idToken,
+      })
+        .then((response) => {
+          console.log("Login exitoso: ", response);
+          dispatch(
+            setUser({
+              email: email,
+              idToken: result.data.idToken,
+            })
+          );
+          Alert.alert("Bienvenido", "Has iniciado sesión correctamente.");
+          navigation.navigate("Main");
         })
-      );
+        .catch((err) => {});
     }
   }, [result]);
 
@@ -56,10 +68,6 @@ export default function Register() {
         password,
         returnSecureToken: true,
       }).unwrap();
-      Alert.alert(
-        "Registro exitoso",
-        "Te has registrado correctamente. Iniciando sesión"
-      );
     } catch (error) {
       console.error("Este es el error: ", error);
     }

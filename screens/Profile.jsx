@@ -14,6 +14,7 @@ import arrow from "../assets/arrow.png";
 import { useNavigation } from "@react-navigation/native";
 import { useGetProfileimageQuery } from "../services/shopServices";
 import Navbar from "../components/Navbar";
+import { deleteSession } from "../persistence";
 
 export default function Profile() {
   const navigation = useNavigation();
@@ -31,8 +32,14 @@ export default function Profile() {
         },
         {
           text: "Confirmar",
-          onPress: () => {
-            dispatch(clearUser());
+          onPress: async () => {
+            try {
+              const response = await deleteSession();
+              console.log(response);
+              dispatch(clearUser());
+            } catch (error) {
+              console.log(error);
+            }
           },
         },
       ],

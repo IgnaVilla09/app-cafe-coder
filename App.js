@@ -1,21 +1,54 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navigation from "./Navigation";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import Register from "./components/Register";
-import { Provider } from "react-redux";
+import { Provider, useDispatch } from "react-redux";
 import store from "./context/store";
 import { useSelector } from "react-redux";
+import { getSession, initSQliteDB } from "./persistence";
+import { setUser } from "./features/UserSlice";
+
+(async () => {
+  try {
+    const response = await initSQliteDB();
+    console.log("DB local inicializada:", response);
+  } catch (error) {
+    Alert.alert("Error inicializando la DB local:", error);
+  }
+})();
 
 const Stack = createStackNavigator();
 
 function App() {
   const { user } = useSelector((state) => state.auth.value);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await getSession();
+        if (response.rows._array.length) {
+          const user = response.rows._array[0];
+          console.log({ user });
+          dispatch(
+            setUser({
+              email: user.email,
+              localId: user.localId,
+              idToken: user.token,
+            })
+          );
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    })();
+  }, []);
 
   return (
     <NavigationContainer>

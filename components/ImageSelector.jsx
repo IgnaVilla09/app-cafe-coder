@@ -24,7 +24,7 @@ export default function ImageSelector() {
   const [image, setImage] = useState(null);
   const [triggerPostImage, result] = usePostProfileImageMutation();
   const dispatch = useDispatch();
-  const { localId } = useSelector((state) => state.auth.value);
+  const { localId, imageCamera } = useSelector((state) => state.auth.value);
   const { data: imageFromBase } = useGetProfileimageQuery(localId);
 
   const navigation = useNavigation();

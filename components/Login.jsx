@@ -14,6 +14,7 @@ import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import { useSignInMutation } from "../services/authServices";
 import { setUser } from "../features/UserSlice";
+import { insertSession } from "../persistence";
 
 export default function Login() {
   const navigation = useNavigation();
@@ -27,14 +28,23 @@ export default function Login() {
     try {
       const result = await signIn({ email, password });
       if (result.data.localId && result.data.idToken) {
-        dispatch(
-          setUser({
-            email: email,
-            idToken: result.data.idToken,
+        insertSession({
+          email: result.data.email,
+          localId: result.data.localId,
+          token: result.data.idToken,
+        })
+          .then((response) => {
+            console.log("Login exitoso: ", response);
+            dispatch(
+              setUser({
+                email: email,
+                idToken: result.data.idToken,
+              })
+            );
+            Alert.alert("Bienvenido", "Has iniciado sesión correctamente.");
+            navigation.navigate("Main");
           })
-        );
-        Alert.alert("Bienvenido", "Has iniciado sesión correctamente.");
-        navigation.navigate("Main");
+          .catch((err) => {});
       } else {
         Alert.alert(
           "Error",
@@ -42,10 +52,7 @@ export default function Login() {
         );
       }
     } catch (error) {
-      Alert.alert(
-        "Error",
-        "Hubo un problema al iniciar sesión. Por favor, inténtelo de nuevo más tarde."
-      );
+      Alert.alert("Error", `${error}`);
     }
   };
 
@@ -84,9 +91,6 @@ export default function Login() {
             onChangeText={(text) => setPassword(text)}
           />
         </View>
-        <TouchableOpacity>
-          <Text style={styles.btnLink}>¿Olvidaste tu contraseña?</Text>
-        </TouchableOpacity>
         <BtnSecondary title={"Ingresar"} sizeBtn={250} onPress={handleLogin} />
         <View>
           <TouchableOpacity
